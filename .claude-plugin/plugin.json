@@ -1,0 +1,11 @@
+{
+  "name": "mcanalytics",
+  "displayName": "MCAnalytics",
+  "version": "1.0.0",
+  "description": "Ask about your Minecraft network: players, return rate, join sources, server health and store revenue, read from your MCAnalytics dashboard.",
+  "author": { "name": "MCAnalytics", "url": "https://mcanalytics.org", "email": "mail@mcanalytics.org" },
+  "homepage": "https://mcanalytics.org/docs/ai-connectors",
+  "repository": "https://github.com/Jan1k1/mcanalytics-plugin",
+  "license": "MIT",
+  "keywords": ["minecraft", "analytics", "server", "velocity", "paper"]
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "mcanalytics",
+  "version": "1.0.0",
+  "description": "Ask about your Minecraft network: players, return rate, join sources, server health and store revenue, read from your MCAnalytics dashboard.",
+  "author": {
+    "name": "MCAnalytics",
+    "email": "mail@mcanalytics.org",
+    "url": "https://mcanalytics.org"
+  },
+  "homepage": "https://mcanalytics.org/docs/ai-connectors",
+  "repository": "https://github.com/Jan1k1/mcanalytics-plugin",
+  "license": "MIT",
+  "keywords": ["minecraft", "analytics", "server"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "MCAnalytics",
+        "shortDescription": "Minecraft server analytics",
+        "longDescription": "MCAnalytics measures a Minecraft network. A connector on your Velocity, BungeeCord, Paper, Folia or Spigot servers records joins, sessions, playtime, tick rate and store purchases, and the dashboard turns them into the numbers an owner decides on: who came back, which join address brought them, which server is slow, and what the store took.\n\nThis plugin reads those same numbers. Ask how many players came back this week, why joins dropped on Tuesday, which server lags most, or how revenue this month compares with last month, and the answer comes from your own data.\n\nIt is read only. Eleven tools read; none writes. No tool can change a setting, delete a row, send a message or spend money.\n\nYou decide what it reaches. Signing in happens on mcanalytics.org, and the approval screen asks which of your networks the plugin may read. Approvals are listed in Settings under Connected AI apps and end the moment you press Revoke, which also ends the tokens already issued.\n\nPlan rules are the dashboard's own. Ask for something your plan does not include and the answer says so instead of inventing a number.",
+        "developerName": "MCAnalytics",
+        "category": "Productivity",
+        "capabilities": [
+          "Read network overview",
+          "Read player activity",
+          "Read retention",
+          "Read server health",
+          "Read join sources",
+          "Read store revenue"
+        ],
+        "websiteURL": "https://mcanalytics.org/docs/ai-connectors",
+        "supportURL": "https://mcanalytics.org/docs/ai-connectors",
+        "privacyPolicyURL": "https://mcanalytics.org/privacy",
+        "termsOfServiceURL": "https://mcanalytics.org/terms",
+        "logo": "./assets/logo.svg"
+      },
+      "onboardingSkill": "./skills/network-report/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Weekly return",
+              "prompt": "How many players came back this week?",
+              "tools_triggered": "network_overview",
+              "expected_behavior": "States the 7 day return rate and returning players for the approved network, number first."
+            },
+            {
+              "description": "Find a drop",
+              "prompt": "Why did joins drop on Tuesday?",
+              "tools_triggered": "compare_ranges, player_activity_timeseries, join_sources",
+              "expected_behavior": "Names the hour or day joins fell, the size of the drop, and the source or server most likely behind it."
+            },
+            {
+              "description": "Lag check",
+              "prompt": "Which server lags most right now?",
+              "tools_triggered": "server_health",
+              "expected_behavior": "Names the server with the lowest tick rate and gives its tick rate, memory and last heartbeat."
+            },
+            {
+              "description": "Revenue comparison",
+              "prompt": "Compare revenue this month with last month.",
+              "tools_triggered": "compare_ranges, revenue_summary",
+              "expected_behavior": "Gives both revenue totals and the change between them."
+            },
+            {
+              "description": "Best join source",
+              "prompt": "Which join address brings players who actually stay?",
+              "tools_triggered": "join_sources",
+              "expected_behavior": "Ranks join addresses by players who returned, with the return rate of each."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Write request",
+              "prompt": "Delete the player Steve."
+            },
+            {
+              "description": "Network the user does not own",
+              "prompt": "Show me revenue for a network I am not a member of."
+            },
+            {
+              "description": "Range beyond the plan",
+              "prompt": "Show me the last two years of players on my Starter network."
+            }
+          ]
+        },
+        "demo_recording_url": "https://mcanalytics.org/docs/ai-connectors"
+      },
+      "publication": {
+        "release_notes": "First release: eleven read only tools for network overview, player activity, retention, server health, top players, join sources, revenue, geography, range comparison and recent alerts."
+      }
+    }
+  }
+}

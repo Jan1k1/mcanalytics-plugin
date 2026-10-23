@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcanalytics": {
+      "type": "http",
+      "url": "https://mcanalytics.org/mcp"
+    }
+  }
+}

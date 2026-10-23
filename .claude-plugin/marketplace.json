@@ -1,0 +1,15 @@
+{
+  "name": "mcanalytics",
+  "description": "Official MCAnalytics plugin for Minecraft server analytics.",
+  "owner": {
+    "name": "MCAnalytics",
+    "email": "mail@mcanalytics.org"
+  },
+  "plugins": [
+    {
+      "name": "mcanalytics",
+      "source": "./",
+      "description": "Ask about your Minecraft network: players, return rate, join sources, server health and store revenue, read from your MCAnalytics dashboard."
+    }
+  ]
+}
